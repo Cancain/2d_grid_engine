@@ -1,6 +1,5 @@
 #include "./TestPlayer.h"
 
-
 TestPlayer::TestPlayer(SDL_Renderer *renderer, const unsigned int yPos, const unsigned int xPos)
   :_yPos(yPos), _xPos(xPos), _velocity(0.05f){
     _body.x = _xPos;
@@ -8,9 +7,6 @@ TestPlayer::TestPlayer(SDL_Renderer *renderer, const unsigned int yPos, const un
     _body.h = 100;
     _body.w = 100;
 
-    SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
-    SDL_RenderFillRect(renderer, &_body);
-    SDL_RenderPresent(renderer);
   }
 
 TestPlayer::TestPlayer(SDL_Renderer *renderer): 
@@ -30,4 +26,10 @@ unsigned int TestPlayer::GetXPos() const {
 
 unsigned int TestPlayer::GetYPos() const {
   return _yPos;
+}
+
+void TestPlayer::RenderPlayer(SDL_Renderer *renderer){
+  SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+  SDL_RenderFillRect(renderer, &_body);
+  SDL_RenderPresent(renderer);
 }

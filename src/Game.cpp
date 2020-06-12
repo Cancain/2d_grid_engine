@@ -40,6 +40,7 @@ SDL_Renderer *createRenderer(SDL_Window *window){
   return renderer;
 }
 
+
 void Game::Initialize(const int width, const int height){
   if(SDL_Init(SDL_INIT_EVERYTHING) != 0){
     std::cerr << "Sorry, could not initialize SDL" << std::endl;
@@ -48,10 +49,18 @@ void Game::Initialize(const int width, const int height){
 
   window = createWindow(width, height);
   renderer = createRenderer(window);
+  TestPlayer *p = new TestPlayer(renderer, 25, 25);
+  player = p;
 
   isRunning = true;
   return;
 
+}
+
+void handleKeyDown(SDL_Keycode key){
+  if(key == SDLK_w){
+
+  }
 }
 
 void Game::ProcessInput(){
@@ -61,6 +70,9 @@ void Game::ProcessInput(){
   switch(event.type) {
     case SDL_QUIT:
       isRunning = false;
+      break;
+    case SDL_KEYDOWN: 
+      handleKeyDown(event.key.keysym.sym);
       break;
     default:
       break;
@@ -72,8 +84,8 @@ void Game::Update(){}
 void Game::Render(){
   SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
   SDL_RenderClear(renderer);
+  player->RenderPlayer(renderer);
 
-  TestPlayer *player = new TestPlayer(renderer, 25, 25);
   SDL_RenderPresent(renderer);
 }
 

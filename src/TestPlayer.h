@@ -1,3 +1,6 @@
+#ifndef _TestPlayer_h
+#define _TestPlayer_h
+
 #include <SDL2/SDL.h>
 
 class TestPlayer {
@@ -16,4 +19,7 @@ class TestPlayer {
     void SetYPos(const unsigned int y);
     unsigned int GetYPos() const;
     unsigned int GetXPos() const;
+    void RenderPlayer(SDL_Renderer *renderer);
 };
+
+#endif
