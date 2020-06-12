@@ -20,6 +20,7 @@ class TestPlayer {
     unsigned int GetYPos() const;
     unsigned int GetXPos() const;
     void RenderPlayer(SDL_Renderer *renderer);
+    float GetVelocity();
 };
 
 #endif

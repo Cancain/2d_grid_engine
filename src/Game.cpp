@@ -57,9 +57,22 @@ void Game::Initialize(const int width, const int height){
 
 }
 
-void handleKeyDown(SDL_Keycode key){
+void Game::handleKeyDown(const SDL_Keycode key){
   if(key == SDLK_w){
-
+    int newYPos = _player->GetYPos() + _player->GetVelocity();
+    _player->SetYPos(600);
+  }
+  if(key == SDLK_s){
+    int newYPos = _player->GetYPos() - _player->GetVelocity();
+    _player->SetYPos(newYPos);
+  }
+  if(key == SDLK_d){
+    int newXPos = _player->GetXPos() + _player->GetVelocity();
+    _player->SetXPos(newXPos);
+  }
+  if(key == SDLK_a){
+    int newXPos = _player->GetXPos() - _player->GetVelocity();
+    _player->SetXPos(newXPos);
   }
 }
 

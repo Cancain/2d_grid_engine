@@ -10,6 +10,7 @@ class Game {
     SDL_Window *_window;
     SDL_Renderer *_renderer;
     TestPlayer *_player {nullptr};
+    void handleKeyDown(const SDL_Keycode key);
 
   public:
     Game();

@@ -2,22 +2,19 @@
 
 TestPlayer::TestPlayer(SDL_Renderer *renderer, const unsigned int yPos, const unsigned int xPos)
   :_yPos(yPos), _xPos(xPos), _velocity(0.05f){
-    _body.x = _xPos;
-    _body.y = _yPos;
     _body.h = 100;
     _body.w = 100;
-
   }
 
 TestPlayer::TestPlayer(SDL_Renderer *renderer): 
   TestPlayer(renderer, 0, 0){}
 
 void TestPlayer::SetXPos(const unsigned int x){
-  _xPos = x;
+  _body.x = x;
 }
 
 void TestPlayer::SetYPos(const unsigned int y){
-  _yPos = y;
+  _body.y = y;
 }
 
 unsigned int TestPlayer::GetXPos() const {
@@ -26,6 +23,10 @@ unsigned int TestPlayer::GetXPos() const {
 
 unsigned int TestPlayer::GetYPos() const {
   return _yPos;
+}
+
+float TestPlayer::GetVelocity(){
+  return _velocity;
 }
 
 void TestPlayer::RenderPlayer(SDL_Renderer *renderer){
