@@ -53,7 +53,18 @@ void Game::Initialize(const int width, const int height){
 
 }
 
-void Game::ProcessInput(){}
+void Game::ProcessInput(){
+  SDL_Event event;
+  SDL_PollEvent(&event);
+
+  switch(event.type) {
+    case SDL_QUIT:
+      isRunning = false;
+      break;
+    default:
+      break;
+  }
+}
 
 void Game::Update(){}
 
