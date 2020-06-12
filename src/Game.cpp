@@ -1,5 +1,6 @@
 #include <iostream>
 #include "./Game.h"
+#include "./TestPlayer.h"
 
 Game::Game(){
   isRunning = false;
@@ -72,6 +73,7 @@ void Game::Render(){
   SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
   SDL_RenderClear(renderer);
 
+  TestPlayer *player = new TestPlayer(renderer, 25, 25);
   SDL_RenderPresent(renderer);
 }
 
