@@ -68,6 +68,15 @@ void Game::ProcessInput(){
 
 void Game::Update(){}
 
-void Game::Render(){}
+void Game::Render(){
+  SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+  SDL_RenderClear(renderer);
 
-void Game::Destroy(){};
+  SDL_RenderPresent(renderer);
+}
+
+void Game::Destroy(){
+  SDL_DestroyRenderer(renderer);
+  SDL_DestroyWindow(window);
+  SDL_Quit();
+};
