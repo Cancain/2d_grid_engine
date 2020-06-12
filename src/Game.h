@@ -6,10 +6,10 @@
 
 class Game {
   private:
-    bool isRunning;
-    SDL_Window *window;
-    SDL_Renderer *renderer;
-    TestPlayer *player {nullptr};
+    bool _isRunning;
+    SDL_Window *_window;
+    SDL_Renderer *_renderer;
+    TestPlayer *_player {nullptr};
 
   public:
     Game();

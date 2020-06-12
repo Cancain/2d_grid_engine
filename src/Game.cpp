@@ -3,14 +3,14 @@
 #include "./TestPlayer.h"
 
 Game::Game(){
-  isRunning = false;
+  _isRunning = false;
 }
 
 Game::~Game(){
 }
 
 bool Game::IsRunning() const {
-  return isRunning;
+  return _isRunning;
 }
 
 SDL_Window *createWindow(const int width, const int height){
@@ -47,12 +47,12 @@ void Game::Initialize(const int width, const int height){
     return;
   }
 
-  window = createWindow(width, height);
-  renderer = createRenderer(window);
-  TestPlayer *p = new TestPlayer(renderer, 25, 25);
-  player = p;
+  _window = createWindow(width, height);
+  _renderer = createRenderer(_window);
+  TestPlayer *p = new TestPlayer(_renderer, 25, 25);
+  _player = p;
 
-  isRunning = true;
+  _isRunning = true;
   return;
 
 }
@@ -69,7 +69,7 @@ void Game::ProcessInput(){
 
   switch(event.type) {
     case SDL_QUIT:
-      isRunning = false;
+      _isRunning = false;
       break;
     case SDL_KEYDOWN: 
       handleKeyDown(event.key.keysym.sym);
@@ -82,15 +82,15 @@ void Game::ProcessInput(){
 void Game::Update(){}
 
 void Game::Render(){
-  SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-  SDL_RenderClear(renderer);
-  player->RenderPlayer(renderer);
+  SDL_SetRenderDrawColor(_renderer, 0, 0, 0, 255);
+  SDL_RenderClear(_renderer);
+  _player->RenderPlayer(_renderer);
 
-  SDL_RenderPresent(renderer);
+  SDL_RenderPresent(_renderer);
 }
 
 void Game::Destroy(){
-  SDL_DestroyRenderer(renderer);
-  SDL_DestroyWindow(window);
+  SDL_DestroyRenderer(_renderer);
+  SDL_DestroyWindow(_window);
   SDL_Quit();
 };
