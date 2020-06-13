@@ -2,15 +2,12 @@
 #define GAME_H
 
 #include <SDL2/SDL.h>
-#include "./TestPlayer.h"
 
 class Game {
   private:
     bool _isRunning;
     SDL_Window *_window;
     SDL_Renderer *_renderer;
-    TestPlayer *_player {nullptr};
-    void handleKeyDown(const SDL_Keycode key);
 
   public:
     Game();

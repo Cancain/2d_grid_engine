@@ -49,31 +49,10 @@ void Game::Initialize(const int width, const int height){
 
   _window = createWindow(width, height);
   _renderer = createRenderer(_window);
-  TestPlayer *p = new TestPlayer(_renderer, 25, 25);
-  _player = p;
 
   _isRunning = true;
   return;
 
-}
-
-void Game::handleKeyDown(const SDL_Keycode key){
-  if(key == SDLK_w){
-    int newYPos = _player->GetYPos() + _player->GetVelocity();
-    _player->SetYPos(600);
-  }
-  if(key == SDLK_s){
-    int newYPos = _player->GetYPos() - _player->GetVelocity();
-    _player->SetYPos(newYPos);
-  }
-  if(key == SDLK_d){
-    int newXPos = _player->GetXPos() + _player->GetVelocity();
-    _player->SetXPos(newXPos);
-  }
-  if(key == SDLK_a){
-    int newXPos = _player->GetXPos() - _player->GetVelocity();
-    _player->SetXPos(newXPos);
-  }
 }
 
 void Game::ProcessInput(){
@@ -83,9 +62,6 @@ void Game::ProcessInput(){
   switch(event.type) {
     case SDL_QUIT:
       _isRunning = false;
-      break;
-    case SDL_KEYDOWN: 
-      handleKeyDown(event.key.keysym.sym);
       break;
     default:
       break;
@@ -97,7 +73,6 @@ void Game::Update(){}
 void Game::Render(){
   SDL_SetRenderDrawColor(_renderer, 0, 0, 0, 255);
   SDL_RenderClear(_renderer);
-  _player->RenderPlayer(_renderer);
 
   SDL_RenderPresent(_renderer);
 }
