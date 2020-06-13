@@ -27,7 +27,7 @@ SDL_Window *createWindow(const int width, const int height){
       SDL_WINDOWPOS_CENTERED, 
       width, 
       height, 
-      SDL_WINDOW_FULLSCREEN
+      SDL_WINDOW_BORDERLESS
       );
 
   if(!window){
@@ -78,12 +78,48 @@ void Game::ProcessInput(){
 float dotPosX = 0;
 float dotPosY = 0;
 
-float dotVelX = 10.0f;
-float dotVelY = 10.0f;
+float dotVelX = 100.0f;
+float dotVelY = 100.0f;
+
+const int DOTSIZE = 20;
 
 void moveTestDot(float deltaTime){
-  dotPosX += dotVelX * deltaTime;
-  dotPosY += dotVelY * deltaTime;
+  static bool xMovePositive {true};
+  static bool xHasReachedMax {false};
+  static bool yMovePositive {true};
+  static bool yHasReachedMax {false};
+
+  if(dotPosX >= (WINDOW_WIDTH - DOTSIZE) && !xHasReachedMax){
+    xMovePositive = false;
+    xHasReachedMax = true;
+  }
+
+  if(dotPosX <= 0 && xHasReachedMax){
+    xMovePositive = true;
+    xHasReachedMax = false;
+  }
+
+  if(dotPosY >= (WINDOW_HEIGHT - DOTSIZE) && !yHasReachedMax){
+    yMovePositive = false;
+    yHasReachedMax = true;
+  }
+
+  if(dotPosY <= 0 && yHasReachedMax){
+    yMovePositive = true;
+    yHasReachedMax = false;
+  }
+
+  if(xMovePositive){
+    dotPosX += dotVelX * deltaTime;
+  } else {
+    dotPosX -= dotVelX * deltaTime;
+  }
+  
+  if(yMovePositive){
+    dotPosY += dotVelY * deltaTime;
+  } else {
+    dotPosY -= dotVelY * deltaTime;
+  }
 }
 
 void Game::_updateDeltaTime(){
@@ -106,25 +142,25 @@ void Game::Update(){
   moveTestDot(_deltaTime);
 }
 
+//*
+// Moving dot to test functionality, will be removed later
+//*
 void createTestDot(SDL_Renderer *renderer){
   SDL_Rect dot {
     (int)dotPosX,
     (int)dotPosY,
-    20,
-    20
+    DOTSIZE,
+    DOTSIZE
   };
 
   SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
-
   SDL_RenderFillRect(renderer, &dot);
 }
 
 void Game::Render(){
   SDL_SetRenderDrawColor(_renderer, 0, 0, 0, 255);
   SDL_RenderClear(_renderer);
-
   createTestDot(_renderer);
-
   SDL_RenderPresent(_renderer);
 }
 
