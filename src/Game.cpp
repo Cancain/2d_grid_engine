@@ -12,6 +12,14 @@ bool Game::IsRunning() const {
   return _isRunning;
 }
 
+void Game::SetDeltaTime(const float deltaTime){
+  _deltaTime = deltaTime;
+};
+
+float Game::GetDeltaTime() const{
+  return _deltaTime;
+}
+
 SDL_Window *createWindow(const int width, const int height){
   SDL_Window *window = SDL_CreateWindow(
       "My game!", 
@@ -67,13 +75,22 @@ void Game::ProcessInput(){
   }
 }
 
-void Game::Update(){}
-
 float dotPosX = 0;
 float dotPosY = 0;
 
-float dotVelX = 0.05f;
-float dotVelY = 0.05f;
+float dotVelX = 0.01f;
+float dotVelY = 0.01f;
+
+void moveTestDot(){
+  dotPosX += dotVelX;
+  dotPosY += dotVelY;
+}
+
+void Game::Update(){
+  moveTestDot();
+
+
+}
 
 void createTestDot(SDL_Renderer *renderer){
   SDL_Rect dot {

@@ -2,12 +2,14 @@
 #define GAME_H
 
 #include <SDL2/SDL.h>
+#include "./Constants.h"
 
 class Game {
   private:
     bool _isRunning;
     SDL_Window *_window;
     SDL_Renderer *_renderer;
+    float _deltaTime;
 
   public:
     Game();
@@ -20,6 +22,8 @@ class Game {
     void Destroy();
     void SetPlayer(SDL_Rect *player);
     SDL_Rect *GetPlayer();
+    void SetDeltaTime(const float deltaTime);
+    float GetDeltaTime() const;
 
 };
 
