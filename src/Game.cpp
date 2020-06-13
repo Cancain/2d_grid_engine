@@ -1,6 +1,5 @@
 #include <iostream>
 #include "./Game.h"
-#include "./TestPlayer.h"
 
 Game::Game(){
   _isRunning = false;
