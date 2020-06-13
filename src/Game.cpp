@@ -69,9 +69,30 @@ void Game::ProcessInput(){
 
 void Game::Update(){}
 
+float dotPosX = 0;
+float dotPosY = 0;
+
+float dotVelX = 0.05f;
+float dotVelY = 0.05f;
+
+void createTestDot(SDL_Renderer *renderer){
+  SDL_Rect dot {
+    (int)dotPosX,
+    (int)dotPosY,
+    20,
+    20
+  };
+
+  SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+
+  SDL_RenderFillRect(renderer, &dot);
+}
+
 void Game::Render(){
   SDL_SetRenderDrawColor(_renderer, 0, 0, 0, 255);
   SDL_RenderClear(_renderer);
+
+  createTestDot(_renderer);
 
   SDL_RenderPresent(_renderer);
 }
