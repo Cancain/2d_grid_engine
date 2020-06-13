@@ -10,6 +10,9 @@ class Game {
     SDL_Window *_window;
     SDL_Renderer *_renderer;
     float _deltaTime;
+    int _ticksLastFrame;
+    void _updateDeltaTime();
+    void _waitForTargetFramerate();
 
   public:
     Game();

@@ -78,18 +78,32 @@ void Game::ProcessInput(){
 float dotPosX = 0;
 float dotPosY = 0;
 
-float dotVelX = 0.01f;
-float dotVelY = 0.01f;
+float dotVelX = 10.0f;
+float dotVelY = 10.0f;
 
-void moveTestDot(){
-  dotPosX += dotVelX;
-  dotPosY += dotVelY;
+void moveTestDot(float deltaTime){
+  dotPosX += dotVelX * deltaTime;
+  dotPosY += dotVelY * deltaTime;
+}
+
+void Game::_updateDeltaTime(){
+  _deltaTime = (SDL_GetTicks() - _ticksLastFrame) / 1000.0f;
+  _ticksLastFrame = SDL_GetTicks();
+  _deltaTime = _deltaTime > 0.05f ? 0.05f : _deltaTime;
+}
+
+void Game::_waitForTargetFramerate(){
+  int timeToWait = FRAME_TARGET_TIME - (SDL_GetTicks() - _ticksLastFrame);
+
+  if(timeToWait > 0 && timeToWait <= FRAME_TARGET_TIME){
+    SDL_Delay(timeToWait);
+  }
 }
 
 void Game::Update(){
-  moveTestDot();
-
-
+  _waitForTargetFramerate();
+  _updateDeltaTime();
+  moveTestDot(_deltaTime);
 }
 
 void createTestDot(SDL_Renderer *renderer){
