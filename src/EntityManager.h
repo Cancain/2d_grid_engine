@@ -4,6 +4,7 @@
 #include <vector>
 #include <string>
 #include "./Entity.h"
+#include "./Component.h"
 
 class EntityManager{
   private:

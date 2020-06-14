@@ -3,12 +3,12 @@
 
 #include <SDL2/SDL.h>
 #include "./Constants.h"
+#include "./EntityManager.h"
 
 class Game {
   private:
     bool _isRunning;
     SDL_Window *_window;
-    SDL_Renderer *_renderer;
     float _deltaTime;
     int _ticksLastFrame;
     void _updateDeltaTime();
@@ -27,6 +27,7 @@ class Game {
     SDL_Rect *GetPlayer();
     void SetDeltaTime(const float deltaTime);
     float GetDeltaTime() const;
+    static SDL_Renderer *Renderer;
 
 };
 

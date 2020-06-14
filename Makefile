@@ -2,7 +2,7 @@ OUTFOLDER=./bin
 OUTFILE=${OUTFOLDER}/main
 
 build:
-	g++ -w -std=c++17 \
+	g++ -w -std=c++17 -Wfatal-errors \
 	./src/*.cpp \
 	-o ${OUTFILE} \
 	-lSDL2;

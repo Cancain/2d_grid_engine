@@ -1,6 +1,9 @@
 #include <iostream>
 #include "./Game.h"
 
+EntityManager* manager;
+SDL_Renderer* Game::Renderer;
+
 Game::Game(){
   _isRunning = false;
 }
@@ -55,7 +58,7 @@ void Game::Initialize(const int width, const int height){
   }
 
   _window = createWindow(width, height);
-  _renderer = createRenderer(_window);
+  Renderer = createRenderer(_window);
 
   _isRunning = true;
   return;
@@ -140,6 +143,7 @@ void Game::Update(){
   _waitForTargetFramerate();
   _updateDeltaTime();
   moveTestDot(_deltaTime);
+  /* manager->Update(_deltaTime); */
 }
 
 //*
@@ -158,14 +162,15 @@ void createTestDot(SDL_Renderer *renderer){
 }
 
 void Game::Render(){
-  SDL_SetRenderDrawColor(_renderer, 0, 0, 0, 255);
-  SDL_RenderClear(_renderer);
-  createTestDot(_renderer);
-  SDL_RenderPresent(_renderer);
+  SDL_SetRenderDrawColor(Renderer, 0, 0, 0, 255);
+  SDL_RenderClear(Renderer);
+  createTestDot(Renderer);
+  SDL_RenderPresent(Renderer);
+  /* manager->Render(); */
 }
 
 void Game::Destroy(){
-  SDL_DestroyRenderer(_renderer);
+  SDL_DestroyRenderer(Renderer);
   SDL_DestroyWindow(_window);
   SDL_Quit();
 };
