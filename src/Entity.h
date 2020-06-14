@@ -4,6 +4,9 @@
 #include "./EntityManager.h"
 #include "./Component.h"
 
+class EntityManager;
+class Component;
+
 class Entity{
   private:
     EntityManager& _manager;
